@@ -3,6 +3,7 @@ int leituraPino = 0;
 int palvraBinaria[200];
 int tempo_total = 0;
 int meutempo = 0;
+int cont = 1;
 void setup()
 {
 
@@ -18,14 +19,19 @@ void loop()
   
   if(leituraPino == 0)
   {
+    palvraBinaria[cont] = digitalRead(pino);
     meutempo = millis();
-    while(tempo_total < 2000)
+    cont++;
+    while(1)
     {   
-      
+      leituraPino = digitalRead(pino);
+      palvraBinaria[cont] = leituraPino;
+      cont++;
       tempo_total = millis() - meutempo;
-      Serial.print(tempo_total);
-      Serial.print(" ");
-      Serial.println("Nildao");
+      if(leituraPino == 1 && tempo_total > 0.001 )
+      {
+        
+      }
     }
     
   }
