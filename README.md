@@ -1,1 +1,1 @@
-# Código do tcc do técnico
+Tcc técnico
