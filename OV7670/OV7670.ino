@@ -12,8 +12,6 @@ OV7670 Camera module with SD card module
 
 
 #include <Wire.h>
-#include <SD.h>
-int CS_Pin = 10;
 
 void Init_YUV422(){
   WriteOV7670(0x12, 0x00);//COM7
@@ -104,6 +102,7 @@ void XCLK_SETUP(void){
   //Toggle OC1A output pin on every match instance
   //Therefore, the generated waveform will have half
   //the frequency of the driving clock i.e. 8Mhz
+  //a frequecia de direçao do relogio isto e 
   //OC1A pin- PB1 (alternate functn) pin i.e. Arduino pin 9
   OCR1A = 0;
 
@@ -136,39 +135,28 @@ void OV7670_PINS(void){
 
 
 
-void QVGA_Image(String title){
+void QVGA_Image(){
   int h,w;
-  //Serial.print("1");
-
-
-  //File dataFile = SD.open(title, FILE_WRITE);
+   
   while (!(PIND & 8));//wait for high
-  //Serial.println("100");
   while ((PIND & 8));//wait for low
-  //Serial.println("100");
-  h = 240;
+ 
+    h = 10;
   while (h--){
-    w = 320;
-    byte dataBuffer[320];
-    //Serial.print("6");
-
+        w = 10;
+       byte dataBuffer[10];
     while (w--){
       while ((PIND & 4));   //wait for low
-      //Serial.print("7");
-
-      dataBuffer[319-w] = (PINC & 15) | (PIND & 240);
-      //Serial.print("8");
-
+        dataBuffer[9-w] = (PINC & 15) | (PIND & 10);
       while (!(PIND & 4));  //wait for high
       while ((PIND & 4));   //wait for low
       while (!(PIND & 4));  //wait for high
     }
-    for (int i = 0; i< 320;++i)
-      Serial.println(dataBuffer[i]);
-    delay(60000);
-
   }
+  
+    delay(6000);
 }
+
 
 void setup(){
   Serial.begin(9600);
@@ -179,27 +167,19 @@ void setup(){
   TWI_SETUP();    // Setup SCL for 100KHz
   interrupts();
   Wire.begin();
-  Serial.print("1");
-
   Init_OV7670();
-  //Serial.print("2");
   Init_QVGA();
   Init_YUV422();
-  //Serial.print("3");
   WriteOV7670(0x11, 0x1F); //Range 00-1F
   //noInterrupts();
-//Serial.print("4");
-  pinMode(CS_Pin, OUTPUT);
-  //Serial.print("5");
-  //SD.begin(CS_Pin);
 
 }
 
 
 void loop(){
-  Serial.print("combo");
-  QVGA_Image("0.bmp"); 
+  QVGA_Image(); 
 }
+
 
 
 
