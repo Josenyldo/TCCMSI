@@ -199,7 +199,7 @@ void setup(){
 
 
 void loop(){
-  QVGA_Image("0.bmp");
+  QVGA_Image(50,100);
  
  
 }
