@@ -136,17 +136,16 @@ void OV7670_PINS(void){
 
 
 
-void QVGA_Image(String title){
+void QVGA_Image(int hg,int wd){
   int h,w;
 
   //File dataFile = SD.open(title, FILE_WRITE);
   while (!(PIND & 8));//wait for high
   while ((PIND & 8));//wait for low
 
-  h = 240;
-  while (h--){
-    w = 320;
-    byte dataBuffer[320];
+  while (hg--){
+    w = wd;
+    byte dataBuffer[wd];
     while (w--){
       while ((PIND & 4));   //wait for low
             /*
@@ -156,7 +155,7 @@ void QVGA_Image(String title){
        Quando faço PINC & 15) | (PIND & 240, leios todas as informaçoes que saem dos pinos D0-D7 do OV7670.Eh feito um OR para lermos ao mesmo tempo dos pinos A0-A3 e D4-D7 do arduino
        
        */
-      dataBuffer[319-w] = (PINC & 15) | (PIND & 240);
+      dataBuffer[(wd-1)-w] = (PINC & 15) | (PIND & 240);
       while (!(PIND & 4));  //wait for high
       while ((PIND & 4));   //wait for low
       while (!(PIND & 4));  //wait for high
