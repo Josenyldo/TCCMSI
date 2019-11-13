@@ -23,8 +23,8 @@
 #include <linux/serial.h>
 #endif
 #include <sys/ioctl.h>
-#include </usr/include/SDL2/SDL.h>
-#include <jpeglib.h>
+#include </usr/include/SDL/SDL.h>
+#include </usr/include/jpeglib.h>
 #include <setjmp.h>
 #ifdef __APPLE__
 #include "endian.h"
@@ -290,7 +290,7 @@ int main(int argc, char** argv){
 		}
 	}
 	int protocolVersion=atoi(argv[6]);
-	printf("%d %d %d %zu %d\n",width,height,colspace,baudRate,protocolVersion);
+	//printf("%d %d %d %zu %d\n",width,height,colspace,baudRate,protocolVersion);
 	SDL_Surface* screen = NULL;
 	SDL_Surface* image;
 	if(colspace==RGB565)
