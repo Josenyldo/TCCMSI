@@ -166,13 +166,14 @@ void QVGA_Image(int hg,int wd){
       Serial.print(dataBuffer[i]);
       Serial.print(" ");
     }
-    delay(1000);
     Serial.println();
 
   }
+Serial.println("PArrrrouuuuuuuuu//");
+delay(1000);
 
   // dataFile.close();
-  delay(100);
+  //delay(100);
 }
 
 void setup(){
@@ -203,4 +204,3 @@ void loop(){
  
  
 }
-
